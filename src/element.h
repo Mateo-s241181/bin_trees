@@ -1,6 +1,8 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+#include <vector>
+#include <string>
 
 /// Ein Element eines binären Suchbaumes.
 template <typename K, typename V>
