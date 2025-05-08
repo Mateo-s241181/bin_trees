@@ -24,21 +24,42 @@
         return elem_vec;
     }
 
-    //TODO Segfault error beheben
-
-    /// @brief Creates a binary tree structure with elements out of a given vector
+    /// @brief Creates a binary tree structure with elements out of a given vector.
     /// @param v vector of elements to be placed inside a binary tree
+    /// @return Pointer to the first element of the binary tree
     template <typename K, typename V> Element<K, V>* create_binary_tree(std::vector<Element<K, V>>* v){
 
         if (v->size() == 0){
             return nullptr;
         }
 
-        //Muss bei eins starten, darf das erste Element nicht zu sich selbst hinzufügen
+        //has to start at one, so that the first element doesnt get added twice
         for(auto i = 1; i < v->size(); i++){
 
+            //adds the element at position i to the binary tree
             (*v)[0].add_element(&(v->at(i)));
         }
 
+        //returns the memory adress of the first element of the binary tree
         return &(v->at(0));
+    }
+
+    //TODO: Add binary search algorithm
+    
+    /// @brief Searches for an element with a given key in a binary tree with a given root element, using the binary search algorithm
+    /// @param root_elem_adress Pointer to the root element of a binary tree
+    /// @param key_ Key of the element you are searching for
+    /// @return Pointer to the first element of the binary tree with the key "key_"; nulltptr if element wasnt found
+    template <typename K, typename V> Element<K,V>* binary_search(Element<K,V>* root_adress, K key_){
+
+        //recursion anchors
+        if (root_adress == nullptr){
+            return nullptr;
+        }
+
+        if (root_adress->key == key_){
+            return root_adress;
+        }
+
+        return root_adress->key > key_ ? binary_search(root_adress->left_child_ptr, key_) : binary_search(root_adress->right_child_ptr, key_);
     }

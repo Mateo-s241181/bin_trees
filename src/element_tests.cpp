@@ -13,7 +13,7 @@ TEST_CASE("Constructor", "[binary tree]"){
     REQUIRE(example_elem.right_child_ptr == nullptr);
 }
 
-TEST_CASE("Add element", "[binay tree]"){
+TEST_CASE("Add element", "[binary tree]"){
 
     Element<int, bool> root(1, false);
 
@@ -59,7 +59,7 @@ TEST_CASE("Add element", "[binay tree]"){
 
 }
 
-TEST_CASE("Create Elements from Keys and Values", "[binary tree]"){
+TEST_CASE("Create Elements", "[binary tree]"){
 
     std::vector<int> keys = {0, 1, 2, 3, 4, 5};
     std::vector<std::string> values = {"a", "b", "c", "d", "e", "f"};
@@ -120,4 +120,24 @@ TEST_CASE("Create binary tree", "[binary tree]"){
     REQUIRE(root_adress->right_child_ptr->value == "e");
     REQUIRE(root_adress->left_child_ptr == &elem_vec[1]);
     REQUIRE(root_adress->right_child_ptr == &elem_vec[4]);
+}
+
+TEST_CASE("Binary search", "[binary tree]"){
+
+    std::vector<int> keys = {3, 1, 2, 0, 4, 5};
+    std::vector<std::string> values = {"a", "b", "c", "d", "e", "f"};
+
+    std::vector<Element<int, std::string>> elem_vec = create_elements(keys, values);
+
+    Element<int, std::string>* root_adress = create_binary_tree(&elem_vec);
+
+    REQUIRE(binary_search(root_adress, 3) == &elem_vec[0]);
+    REQUIRE(binary_search(root_adress, 1) == &elem_vec[1]);
+    REQUIRE(binary_search(root_adress, 2) == &elem_vec[2]);
+    REQUIRE(binary_search(root_adress, 0) == &elem_vec[3]);
+    REQUIRE(binary_search(root_adress, 4) == &elem_vec[4]);
+    REQUIRE(binary_search(root_adress, 5) == &elem_vec[5]);
+
+    REQUIRE(binary_search(root_adress, 22) == nullptr);
+
 }

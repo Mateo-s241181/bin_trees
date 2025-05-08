@@ -5,8 +5,7 @@
 #include <string>
 
 /// Ein Element eines binären Suchbaumes.
-template <typename K, typename V>
-struct Element {
+template <typename K, typename V> struct Element {
     
     //Key of the Element
     K key;
